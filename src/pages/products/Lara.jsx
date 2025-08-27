@@ -5,13 +5,13 @@ import { useCart } from '../../contexts/CartContext';
 import ColorChangeTransition from '../../components/ColorChangeTransition';
 import CartButton from '../../components/CartButton';
 
-const laraImg1 = "/Lara/fan1.png";
+const laraImg1 = "/fan 3d/lara/brown/1.png";
 
 // Brown color images - 3 different views
 const laraBrownImages = [
-  "/fan 3d/lara/brown/1.webp",
-  "/fan 3d/lara/brown/2.webp",
-  "/fan 3d/lara/brown/3.webp"
+  "/fan 3d/lara/brown/1.png",
+  "/fan 3d/lara/brown/2.png",
+  "/fan 3d/lara/brown/3.png"
 ];
 
 const laraCreatives = [

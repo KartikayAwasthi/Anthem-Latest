@@ -14,7 +14,7 @@ const Lara = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <img
-          src="/fan 3d/lara/brown/2.webp"
+          src="/fan 3d/lara/brown/2.png"
           alt="Lara Fan"
           className="w-full h-auto object-contain max-h-[50vh] lg:max-h-[80vh]"
         />

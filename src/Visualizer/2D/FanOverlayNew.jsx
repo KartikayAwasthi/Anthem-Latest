@@ -43,7 +43,7 @@ const FanOverlay = () => {
   // Preload images for smoother experience
   useEffect(() => {
     const fanImage = new Image();
-    fanImage.src = `/fan 3d/${selectedFan}/${selectedColor}/1.webp`;
+    fanImage.src = `/fan 3d/${selectedFan}/${selectedColor}/1.png`;
     
     // Once the fan image loads, set loading to false
     fanImage.onload = () => {
@@ -54,7 +54,7 @@ const FanOverlay = () => {
     return () => {
       fanImage.onload = null;
     };
-  }, [selectedFan, selectedColor, roomImage]);  // Added roomImage as dependency
+  }, [selectedFan, selectedColor, roomImage]);
 
   // Update room image when mobile state changes
   useEffect(() => {
@@ -105,20 +105,13 @@ const FanOverlay = () => {
     setLoading(true);
     setSelectedFan(model);
     const modelObj = fanModels.find(m => m.id === model);
+    // Set first color when changing model
     setSelectedColor(modelObj?.colors[0] || '');
-    // Close controls after selection on mobile
-    if (isMobile) {
-      setTimeout(() => setControlsOpen(false), 300);
-    }
   };
 
   const handleColorChange = (color) => {
     setLoading(true);
     setSelectedColor(color);
-    // Close controls after selection on mobile
-    if (isMobile) {
-      setTimeout(() => setControlsOpen(false), 300);
-    }
   };
 
   const handleRoomChange = (roomId) => {
@@ -126,10 +119,6 @@ const FanOverlay = () => {
     const room = allRooms.find(r => r.id === roomId);
     if (room) {
       setRoomImage(isMobile ? room.mobileSrc : room.desktopSrc);
-    }
-    // Close controls after selection on mobile
-    if (isMobile) {
-      setTimeout(() => setControlsOpen(false), 300);
     }
   };
 
@@ -163,15 +152,25 @@ const FanOverlay = () => {
       .join(' ');
   };
 
+  // Get current room name
+  const getCurrentRoomName = () => {
+    return roomImage.includes('room1') ? 'Living Room' : 'Bedroom';
+  };
+
   return (
     <div className="fan-overlay-container">
-      {/* Modern controls panel - New Design */}
+      {/* Bottom overlay controls panel */}
       <div className={`modern-controls ${controlsOpen ? 'open' : ''}`}>
         <div className="controls-header">
-          <h2>Fan Customizer</h2>
-          <button className="close-btn" onClick={toggleControls}>×</button>
+          {/* Add pull handle for better usability */}
+          <div className="pull-handle">
+            <div className="handle-bar"></div>
+          </div>
+          <h2>Customize Your Fan</h2>
+          <button className="close-btn" onClick={toggleControls} aria-label="Close">×</button>
         </div>
         
+        {/* Fan Model Selection */}
         <div className="controls-section">
           <h3>Select Fan Model</h3>
           <div className="model-selector">
@@ -180,6 +179,7 @@ const FanOverlay = () => {
                 key={model.id}
                 onClick={() => handleFanModelChange(model.id)}
                 className={selectedFan === model.id ? 'active' : ''}
+                aria-pressed={selectedFan === model.id}
               >
                 {model.name}
               </button>
@@ -187,6 +187,7 @@ const FanOverlay = () => {
           </div>
         </div>
         
+        {/* Color Selection */}
         <div className="controls-section">
           <h3>Choose Color</h3>
           <div className="color-selector">
@@ -195,6 +196,7 @@ const FanOverlay = () => {
                 key={color}
                 onClick={() => handleColorChange(color)}
                 className={selectedColor === color ? 'active' : ''}
+                aria-pressed={selectedColor === color}
               >
                 {formatDisplayName(color)}
               </button>
@@ -202,16 +204,18 @@ const FanOverlay = () => {
           </div>
         </div>
         
+        {/* Room Environment Selection */}
         <div className="controls-section">
           <h3>Room Environment</h3>
           <div className="room-selector">
             {getRooms().map(room => {
-              const isActive = roomImage === (isMobile ? room.mobileSrc : room.desktopSrc);
+              const isActive = roomImage.includes(room.id);
               return (
                 <button 
                   key={room.id}
                   onClick={() => handleRoomChange(room.id)} 
                   className={isActive ? 'active' : ''}
+                  aria-pressed={isActive}
                 >
                   {room.name}
                 </button>
@@ -234,14 +238,12 @@ const FanOverlay = () => {
             </div>
             <div className="selection-item">
               <span className="item-label">Room:</span>
-              <span className="item-value">
-                {roomImage.includes('room1') ? 'Living Room' : 'Bedroom'}
-              </span>
+              <span className="item-value">{getCurrentRoomName()}</span>
             </div>
           </div>
         </div>
         
-        {/* Sidebar footer with action button */}
+        {/* Controls footer with action button */}
         <div className="controls-footer">
           <button 
             className="action-button" 
@@ -258,10 +260,10 @@ const FanOverlay = () => {
 
       {/* Floating action buttons */}
       <div className="floating-actions">
-        <button className="fab" onClick={toggleRoom} title="Switch Room">
+        <button className="fab" onClick={toggleRoom} title="Switch Room" aria-label="Switch Room">
           <span className="fab-icon">🏠</span>
         </button>
-        <button className="fab primary" onClick={toggleControls} title="Customize Fan">
+        <button className="fab primary" onClick={toggleControls} title="Customize Fan" aria-label="Customize Fan">
           <span className="fab-icon">⚙️</span>
         </button>
       </div>
@@ -276,20 +278,16 @@ const FanOverlay = () => {
         {/* Fan image overlay with high quality rendering */}
         {!loading && (
           <img 
-            src={`/fan 3d/${selectedFan}/${selectedColor}/1.webp`}
+            src={`/fan 3d/${selectedFan}/${selectedColor}/1.png`}
             alt={`${selectedFan} fan in ${selectedColor}`} 
             className="fan-image"
             style={{
               position: 'absolute',
               left: '50%',
-              // Special positioning for room1-mobile
-              top: roomImage.includes('room1-mobile') ? '40%' : (isMobile ? '30%' : '25%'),
-              // Enhanced perspective for room1-mobile to bring fan closer to user
-              transform: `translate(-50%, -50%) perspective(${roomImage.includes('room1-mobile') ? '800px' : '1200px'}) 
-                          rotateX(${roomImage.includes('room1-mobile') ? '20deg' : (isMobile ? '15deg' : '20deg')})
-                          ${roomImage.includes('room1-mobile') ? 'scale(1.15)' : ''}`,
-              // Larger size for room1-mobile
-              maxWidth: roomImage.includes('room1-mobile') ? '65%' : (isMobile ? '55%' : '40%'),
+              top: isMobile ? '40%' : '30%', /* Positioned higher to make room for bottom panel */
+              transform: `translate(-50%, -50%) perspective(${isMobile ? '800px' : '1200px'}) 
+                          rotateX(${isMobile ? '15deg' : '20deg'})`,
+              maxWidth: isMobile ? '60%' : '40%',
               opacity: loading ? 0 : 1
             }}
           />
@@ -302,6 +300,15 @@ const FanOverlay = () => {
           <div className="model-name">{selectedFan}</div>
           <div className="color-name">{formatDisplayName(selectedColor)}</div>
         </div>
+      </div>
+      
+      {/* Bottom customizer toggle bar - visible when panel is closed */}
+      <div 
+        className={`bottom-toggle-bar ${controlsOpen ? 'hidden' : ''}`}
+        onClick={toggleControls}
+      >
+        <div className="toggle-bar-handle"></div>
+        <span>Customize Fan</span>
       </div>
     </div>
   );

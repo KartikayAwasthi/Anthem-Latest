@@ -14,7 +14,7 @@ const Inara = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <img
-          src="/fan 3d/Inaara/Blue/2.webp"
+          src="/fan 3d/Inaara/Blue/2.png"
           alt="Inara Fan"
           className="w-full h-auto object-contain max-h-[50vh] lg:max-h-[80vh]"
         />

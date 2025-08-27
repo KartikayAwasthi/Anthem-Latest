@@ -14,7 +14,7 @@ const Skyro = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <img
-          src="/fan 3d/Skyro/white-silver/2.webp"
+          src="/fan 3d/Skyro/white-silver/2.png"
           alt="Skyro Fan"
           className="w-full h-auto object-contain max-h-[50vh] lg:max-h-[80vh]"
         />

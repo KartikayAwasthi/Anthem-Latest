@@ -130,7 +130,7 @@ const FanOverlay = () => {
         />
         {/* Fan overlay */}
         <img 
-          src={`/fan 3d/${selectedFan}/${selectedColor}/1.webp`}
+          src={`/fan 3d/${selectedFan}/${selectedColor}/1.png`}
           alt="Fan" 
           className="fan-image"
           style={{

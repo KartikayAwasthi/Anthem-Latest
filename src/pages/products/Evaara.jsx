@@ -72,35 +72,35 @@ const evaaraData = {
       image: evaaraImg1, 
       code: "#FFFFFF",
       folder: "cream",
-      images3d: ["/fan 3d/Evaara/cream/1.webp", "/fan 3d/Evaara/cream/2.webp", "/fan 3d/Evaara/cream/3.webp"]
+      images3d: ["/fan 3d/Evaara/cream/1.png", "/fan 3d/Evaara/cream/2.png", "/fan 3d/Evaara/cream/3.png"]
     },
     { 
       name: "Teak Wood", 
       image: evaaraImg2, 
       code: "#CD7F32",
       folder: "brown-1",
-      images3d: ["/fan 3d/Evaara/brown-1/1.webp", "/fan 3d/Evaara/brown-1/2.webp", "/fan 3d/Evaara/brown-1/3.webp"]
+      images3d: ["/fan 3d/Evaara/brown-1/1.png", "/fan 3d/Evaara/brown-1/2.png", "/fan 3d/Evaara/brown-1/3.png"]
     },
     { 
       name: "Matte Black", 
       image: evaaraImg3, 
       code: "#2F2F2F",
       folder: "Black",
-      images3d: ["/fan 3d/Evaara/Black/1.webp", "/fan 3d/Evaara/Black/2.webp", "/fan 3d/Evaara/Black/3.webp"]
+      images3d: ["/fan 3d/Evaara/Black/1.png", "/fan 3d/Evaara/Black/2.png", "/fan 3d/Evaara/Black/3.png"]
     },
     { 
       name: "Brown", 
       image: evaaraImg4, 
       code: "#C0C0C0",
       folder: "Brown-2",
-      images3d: ["/fan 3d/Evaara/Brown-2/1.webp", "/fan 3d/Evaara/Brown-2/2.webp", "/fan 3d/Evaara/Brown-2/3.webp"]
+      images3d: ["/fan 3d/Evaara/Brown-2/1.png", "/fan 3d/Evaara/Brown-2/2.png", "/fan 3d/Evaara/Brown-2/3.png"]
     },
     { 
       name: "Walnut Brown", 
       image: evaaraImg5, 
       code: "#D4AF37",
       folder: "Brown-3",
-      images3d: ["/fan 3d/Evaara/Brown-3/1.webp", "/fan 3d/Evaara/Brown-3/2.webp", "/fan 3d/Evaara/Brown-3/3.webp"]
+      images3d: ["/fan 3d/Evaara/Brown-3/1.png", "/fan 3d/Evaara/Brown-3/2.png", "/fan 3d/Evaara/Brown-3/3.png"]
     }
   ],
   itemDetails: {
